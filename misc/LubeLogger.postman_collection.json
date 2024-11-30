@@ -1,0 +1,1057 @@
+{
+	"info": {
+		"_postman_id": "7858897b-3b66-47ee-98a3-b1f53bb160fe",
+		"name": "LubeLogger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37928675"
+	},
+	"item": [
+		{
+			"name": "Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicles",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/info",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"info"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1",
+							"description": "optional",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Odometer Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Latest Odometer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/latest?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adjusted Odometer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/adjustedodometer?vehicleId=1&odometer=1200",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"adjustedodometer"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						},
+						{
+							"key": "odometer",
+							"value": "1200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Odometer Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "08/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "225000",
+							"type": "text"
+						},
+						{
+							"key": "extrafields[0][name]",
+							"value": "Trip Type",
+							"type": "text"
+						},
+						{
+							"key": "extrafields[0][value]",
+							"value": "Leisure",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Odometer Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "09/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "initialOdometer",
+							"value": "220000",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "225000",
+							"type": "text"
+						},
+						{
+							"key": "extrafields[0][name]",
+							"value": "Trip Type",
+							"type": "text"
+						},
+						{
+							"key": "extrafields[0][value]",
+							"value": "Leisure",
+							"type": "text"
+						},
+						{
+							"key": "notes",
+							"value": "This Record was Updated",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/update?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/servicerecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"servicerecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Service Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/servicerecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"servicerecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Service Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test - updated",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/servicerecords/update?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"servicerecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Repair Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/repairrecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"repairrecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Repair Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/repairrecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"repairrecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Repair Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test - updated",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/repairrecords/update?Id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"repairrecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "Id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upgrade Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/upgraderecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"upgraderecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Upgrade Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/upgraderecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"upgraderecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Upgrade Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "250000",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test - updated",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/upgraderecords/update?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"upgraderecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tax Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/taxrecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"taxrecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Tax Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Test Tax",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/taxrecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"taxrecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Tax Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Test Tax - Updated",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/taxrecords/update?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"taxrecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gas Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/gasrecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"gasrecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Gas Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "230000",
+							"type": "text"
+						},
+						{
+							"key": "fuelconsumed",
+							"value": "15.66",
+							"type": "text"
+						},
+						{
+							"key": "isfilltofull",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "missedfuelup",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/gasrecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"gasrecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Gas Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "odometer",
+							"value": "230000",
+							"type": "text"
+						},
+						{
+							"key": "fuelconsumed",
+							"value": "15.66",
+							"type": "text"
+						},
+						{
+							"key": "isfilltofull",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "missedfuelup",
+							"value": "false",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						},
+						{
+							"key": "notes",
+							"value": "This record was updated",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/gasrecords/update?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"gasrecords",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reminders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/reminders?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"reminders"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Root - Send Reminders Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/reminders/send?urgencies=NotUrgent&urgencies=Urgent&urgencies=VeryUrgent&urgencies=PastDue",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"reminders",
+						"send"
+					],
+					"query": [
+						{
+							"key": "urgencies",
+							"value": "NotUrgent"
+						},
+						{
+							"key": "urgencies",
+							"value": "Urgent"
+						},
+						{
+							"key": "urgencies",
+							"value": "VeryUrgent"
+						},
+						{
+							"key": "urgencies",
+							"value": "PastDue"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Root - Make Backup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/makebackup",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"makebackup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Root - Cleanup",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/cleanup?deepClean=true",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"cleanup"
+					],
+					"query": [
+						{
+							"key": "deepClean",
+							"value": "true",
+							"description": "Clear unlinked images and documents if true"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{admin_password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{admin_username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://demo.lubelogger.com",
+			"type": "string"
+		},
+		{
+			"key": "admin_username",
+			"value": "test",
+			"type": "string"
+		},
+		{
+			"key": "admin_password",
+			"value": "1234",
+			"type": "string"
+		}
+	]
+}
