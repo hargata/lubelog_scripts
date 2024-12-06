@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "7858897b-3b66-47ee-98a3-b1f53bb160fe",
+		"_postman_id": "0453dcbb-94c8-417e-be40-cde849c3cf82",
 		"name": "LubeLogger",
+		"description": "Postman Collection for LubeLogger API\n\n[https://lubelogger.com](https://lubelogger.com)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37928675"
 	},
@@ -217,13 +218,18 @@
 						},
 						{
 							"key": "notes",
-							"value": "This Record was Updated",
+							"value": "This record was updated",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/odometerrecords/update?id=1",
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -232,6 +238,26 @@
 						"vehicle",
 						"odometerrecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Odometer Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords",
+						"delete"
 					],
 					"query": [
 						{
@@ -346,11 +372,16 @@
 							"key": "cost",
 							"value": "123.45",
 							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/servicerecords/update?id=1",
+					"raw": "{{base_url}}/api/vehicle/servicerecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -359,6 +390,26 @@
 						"vehicle",
 						"servicerecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Service Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/servicerecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"servicerecords",
+						"delete"
 					],
 					"query": [
 						{
@@ -473,11 +524,16 @@
 							"key": "cost",
 							"value": "123.45",
 							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/repairrecords/update?Id=1",
+					"raw": "{{base_url}}/api/vehicle/repairrecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -486,10 +542,30 @@
 						"vehicle",
 						"repairrecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Repair Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/repairrecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"repairrecords",
+						"delete"
 					],
 					"query": [
 						{
-							"key": "Id",
+							"key": "id",
 							"value": "1"
 						}
 					]
@@ -600,11 +676,16 @@
 							"key": "cost",
 							"value": "123.45",
 							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/upgraderecords/update?id=1",
+					"raw": "{{base_url}}/api/vehicle/upgraderecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -613,6 +694,26 @@
 						"vehicle",
 						"upgraderecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Upgrade Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/upgraderecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"upgraderecords",
+						"delete"
 					],
 					"query": [
 						{
@@ -717,11 +818,16 @@
 							"key": "cost",
 							"value": "123.45",
 							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/taxrecords/update?id=1",
+					"raw": "{{base_url}}/api/vehicle/taxrecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -730,6 +836,26 @@
 						"vehicle",
 						"taxrecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tax Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/taxrecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"taxrecords",
+						"delete"
 					],
 					"query": [
 						{
@@ -869,11 +995,16 @@
 							"key": "notes",
 							"value": "This record was updated",
 							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/vehicle/gasrecords/update?id=1",
+					"raw": "{{base_url}}/api/vehicle/gasrecords/update",
 					"host": [
 						"{{base_url}}"
 					],
@@ -882,6 +1013,26 @@
 						"vehicle",
 						"gasrecords",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Gas Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/gasrecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"gasrecords",
+						"delete"
 					],
 					"query": [
 						{
