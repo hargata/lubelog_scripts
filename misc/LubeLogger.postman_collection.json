@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0453dcbb-94c8-417e-be40-cde849c3cf82",
+		"_postman_id": "203bb389-ba6c-4089-b501-00d1d950dbfd",
 		"name": "LubeLogger",
 		"description": "Postman Collection for LubeLogger API\n\n[https://lubelogger.com](https://lubelogger.com)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -1039,6 +1039,60 @@
 							"key": "id",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calendar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/calendar",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"calendar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Document Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "documents",
+							"description": "First File to be uploaded",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "documents",
+							"description": "Second File to be uploaded",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/documents/upload",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"documents",
+						"upload"
 					]
 				}
 			},
