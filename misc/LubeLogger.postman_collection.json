@@ -1,12 +1,30 @@
 {
 	"info": {
-		"_postman_id": "203bb389-ba6c-4089-b501-00d1d950dbfd",
+		"_postman_id": "b0497f37-0428-4e6a-9f50-8eed4a126c96",
 		"name": "LubeLogger",
 		"description": "Postman Collection for LubeLogger API\n\n[https://lubelogger.com](https://lubelogger.com)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37928675"
 	},
 	"item": [
+		{
+			"name": "Who Am I",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/whoami",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"whoami"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Vehicles",
 			"request": {
@@ -257,6 +275,184 @@
 						"api",
 						"vehicle",
 						"odometerrecords",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Plan Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/planrecords?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"planrecords"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Plan Record",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "RepairRecord",
+							"description": "Possible Values - ServiceRecord, RepairRecord, UpgradeRecord",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "Normal",
+							"description": "Possible Values - Low, Critical, Normal",
+							"type": "text"
+						},
+						{
+							"key": "progress",
+							"value": "Testing",
+							"description": "Possible Values - Backlog, InProgress, Testing",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/planrecords/add?vehicleId=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"planrecords",
+						"add"
+					],
+					"query": [
+						{
+							"key": "vehicleId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Plan Record",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "10/26/2024",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test - updated",
+							"type": "text"
+						},
+						{
+							"key": "cost",
+							"value": "123.45",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "UpgradeRecord",
+							"description": "Possible Values - ServiceRecord, RepairRecord, UpgradeRecord",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "Critical",
+							"description": "Possible Values - Low, Critical, Normal",
+							"type": "text"
+						},
+						{
+							"key": "progress",
+							"value": "InProgress",
+							"description": "Possible Values - Backlog, InProgress, Testing",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/planrecords/update",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"planrecords",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Plan Record",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/planrecords/delete?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"planrecords",
 						"delete"
 					],
 					"query": [
