@@ -15,10 +15,32 @@
     		"Color": "#40798C",
     		"Opacity": 0.5
     	},
+		{
+    		"Tags": "tires axles",
+    		"Coordinates": "454,137,28",
+    		"Color": "#D45113",
+			"Shape": "circle",
+    		"Opacity": 0.5
+    	},
     	{
     		"Tags": "tires axles",
-    		"Coordinates": "412,308,419,284,444,278,465,288,470,307,463,326,441,338,420,326",
-    		"Color": "#CFE0C3",
+    		"Coordinates": "661,138,28",
+    		"Color": "#D45113",
+			"Shape": "circle",
+    		"Opacity": 0.5
+    	},
+		{
+    		"Tags": "tires axles",
+    		"Coordinates": "442,306,29",
+    		"Color": "#D45113",
+			"Shape": "circle",
+    		"Opacity": 0.5
+    	},
+		{
+    		"Tags": "tires axles",
+    		"Coordinates": "648,306,29",
+    		"Color": "#D45113",
+			"Shape": "circle",
     		"Opacity": 0.5
     	}
     ]
