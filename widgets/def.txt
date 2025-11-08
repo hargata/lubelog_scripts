@@ -1,0 +1,45 @@
+<script>
+function addDashWidget(widgetLabel, widgetValue) {
+	if ($("#widgetHeaderContent").length == 0) {
+		let widgetHeader = $('<div class="row hideOnPrint" id="widgetHeaderContent"></div>')
+		widgetHeader.insertAfter($("#reportHeaderContent"));
+	}
+	let widgetElem = $('<div class="col-md-3 col-12 mt-2 text-center"></div>');
+	widgetElem.append($(`<span class="lead">${widgetValue}</span><br/><span class="text-secondary">${widgetLabel}</span>`));
+	$("#widgetHeaderContent").append(widgetElem);
+}
+
+function loadDEFRecords() {
+	$.get(`/api/vehicle/servicerecords?vehicleId=${GetVehicleId().vehicleId}&tags=def`, function(data) {
+		if (data.length > 1) { //only calculate DEF values if there are two records or more
+			let totalRecordCount = data.length;
+			let mpgData = [];
+			let previousOdometer = 0;
+			data.map(x => {
+				let distanceTraveled = 0;
+				let defConsumed = parseFloat(x.extraFields.filter(y => y.name == 'DEF')[0].value);
+				if (previousOdometer != 0) {
+					distanceTraveled = parseInt(x.odometer) - previousOdometer;
+				}
+				mpgData.push({
+					odometer: x.odometer,
+					defConsumption: defConsumed,
+					distance: distanceTraveled,
+					mpg: defConsumed > 0 ? distanceTraveled / defConsumed : 0,
+					cost: parseFloat(x.cost)
+				})
+				previousOdometer = x.odometer;
+			})
+			let lastMPG = mpgData[mpgData.length - 1].mpg.toFixed(2);
+			let averageDEFMileage = ((mpgData.filter(y => y.distance > 0).map(x => x.distance).reduce((a, b) => a + b)) / (mpgData.filter(y => y.distance > 0).map(x => x.defConsumption).reduce((a, b) => a + b))).toFixed(2);
+			let totalDEFCost = globalAppendCurrency(globalFloatToString(mpgData.map(x => x.cost).reduce((a, b) => a + b).toFixed(2).toString()));
+			let mpgDataCount = mpgData.length;
+			addDashWidget('Average DEF Mileage', averageDEFMileage);
+			addDashWidget('Last DEF Mileage', lastMPG);
+			addDashWidget('Total DEF Cost', totalDEFCost);
+			addDashWidget('DEF Fillups', mpgDataCount);
+		}
+	})
+}
+loadDEFRecords();
+</script>
