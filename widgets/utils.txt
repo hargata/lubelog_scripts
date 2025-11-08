@@ -1,0 +1,19 @@
+<script>
+//sample utility methods
+
+//adds a widget to the dashboard
+function addDashWidget(widgetLabel, widgetValue) {
+	if ($("#widgetHeaderContent").length == 0) {
+		let widgetHeader = $('<div class="row hideOnPrint" id="widgetHeaderContent"></div>')
+		widgetHeader.insertAfter($("#reportHeaderContent"));
+	}
+	let widgetElem = $('<div class="col-md-3 col-12 mt-2 text-center"></div>');
+	widgetElem.append($(`<span class="lead">${widgetValue}</span><br/><span class="text-secondary">${widgetLabel}</span>`));
+	$("#widgetHeaderContent").append(widgetElem);
+}
+
+//hides additional widgets button
+function hideCustomWidgetsButton() {
+	$('[onclick="showCustomWidgets()"]').hide();
+}
+</script>

@@ -1,0 +1,26 @@
+<script>
+function addDashWidget(widgetLabel, widgetValue) {
+	if ($("#widgetHeaderContent").length == 0) {
+		let widgetHeader = $('<div class="row hideOnPrint" id="widgetHeaderContent"></div>')
+		widgetHeader.insertAfter($("#reportHeaderContent"));
+	}
+	let widgetElem = $('<div class="col-md-3 col-12 mt-2 text-center"></div>');
+	widgetElem.append($(`<span class="lead">${widgetValue}</span><br/><span class="text-secondary">${widgetLabel}</span>`));
+	$("#widgetHeaderContent").append(widgetElem);
+}
+
+function loadExtraFields() {
+	$.get(`/api/vehicle/info/?vehicleId=${GetVehicleId().vehicleId}`, function(data) {
+		if (data.length > 0) {
+			let extraFields = data[0].vehicleData.extraFields;
+			extraFields.map(x => {
+				if (x.value.trim() != '') {
+					addDashWidget(x.name, x.value);
+				}
+			})
+		}
+
+	})
+}
+loadExtraFields();
+</script>
