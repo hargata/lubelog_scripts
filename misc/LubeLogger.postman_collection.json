@@ -1209,6 +1209,26 @@
 			"response": []
 		},
 		{
+			"name": "All Gas Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/gasrecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"gasrecords",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Gas Record",
 			"request": {
 				"method": "POST",
@@ -1434,6 +1454,26 @@
 							"key": "vehicleId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Reminders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/reminders/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"reminders",
+						"all"
 					]
 				}
 			},
