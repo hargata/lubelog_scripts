@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b0497f37-0428-4e6a-9f50-8eed4a126c96",
+		"_postman_id": "19aa014d-0b98-4e63-9cd0-feff81903ad0",
 		"name": "LubeLogger",
 		"description": "Postman Collection for LubeLogger API\n\n[https://lubelogger.com](https://lubelogger.com)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -90,6 +90,26 @@
 							"key": "vehicleId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Odometer Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/odometerrecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"odometerrecords",
+						"all"
 					]
 				}
 			},
@@ -313,6 +333,26 @@
 			"response": []
 		},
 		{
+			"name": "All Plan Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/planrecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"planrecords",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Plan Record",
 			"request": {
 				"method": "POST",
@@ -491,6 +531,26 @@
 			"response": []
 		},
 		{
+			"name": "All Service Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/servicerecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"servicerecords",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Service Record",
 			"request": {
 				"method": "POST",
@@ -637,6 +697,26 @@
 							"key": "vehicleId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Repair Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/repairrecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"repairrecords",
+						"all"
 					]
 				}
 			},
@@ -795,6 +875,26 @@
 			"response": []
 		},
 		{
+			"name": "All Upgrade Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/upgraderecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"upgraderecords",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Add Upgrade Record",
 			"request": {
 				"method": "POST",
@@ -941,6 +1041,26 @@
 							"key": "vehicleId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Tax Records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/vehicle/taxrecords/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"vehicle",
+						"taxrecords",
+						"all"
 					]
 				}
 			},
