@@ -1,0 +1,57 @@
+{
+	"POSTGRES_CONNECTION": "",
+	"LUBELOGGER_MOTD": "",
+	"LUBELOGGER_WEBHOOK": "",
+	"LUBELOGGER_DOMAIN": "",
+	"LUBELOGGER_CUSTOM_WIDGETS": true,
+	"LUBELOGGER_INVARIANT_API": true,
+	"MailConfig": {
+		"EmailServer": "",
+		"EmailFrom": "",
+		"Port": 587,
+		"Username": "",
+		"Password": ""
+	},
+	"OpenIDConfig": {
+		"Name": "",
+		"ClientId": "",
+		"ClientSecret": "",
+		"AuthURL": "",
+		"TokenURL": "",
+		"RedirectURL": "",
+		"Scope": "openid email",
+		"ValidateState": true,
+		"DisableRegularLogin": true,
+		"UsePKCE": true,
+		"LogOutURL": "",
+		"UserInfoURL": "",
+		"JwksURL": "",
+		"RemoteAuthURL": ""
+	},
+	"ReminderUrgencyConfig": {
+		"UrgentDays": 30,
+		"VeryUrgentDays": 7,
+		"UrgentDistance": 100,
+		"VeryUrgentDistance": 50
+	},
+	"DisableRegistration": true,
+	"DefaultReminderEmail": "",
+	"EnableRootUserOIDC": true,
+	"LUBELOGGER_LOCALE_OVERRIDE": "en-US",
+	"LUBELOGGER_LOCALE_DT_OVERRIDE": "en-SE",
+	"LUBELOGGER_COOKIE_LIFESPAN": "30",
+	"Kestrel": {
+		"Endpoints": {
+			"Http": {
+				"Url": "http://mylubeloggerinstance"
+			},
+			"HttpsInlineCertFile": {
+				"Url": "https://mylubeloggerinstance",
+				"Certificate": {
+					"Path": "",
+					"Password": ""
+				}
+			}
+		}
+	}
+}
