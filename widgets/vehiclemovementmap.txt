@@ -1,0 +1,266 @@
+<!-- 
+version:
+Loading and showing leaflet map
+Loading all odometerRecords in the maps
+Grouping the locations on the map
+Clicking the grouped locations will zoom in
+If no further explosing possible of each points, list will show single/all entries below
+Clicking on the entries in the list will close the vehicle movement history and will open the odometerRecord
+-->
+<script>
+var vehicleMap = null;
+var markerClusterGroup = null;
+
+function cleanupMap() {
+    // If a map already exists, destroy it completely
+    if (vehicleMap !== null) {
+        console.log("Cleaning up existing map instance...");
+        vehicleMap.off(); // Remove all event listeners
+        vehicleMap.remove(); // Remove map from DOM and memory
+        vehicleMap = null;
+        markerClusterGroup = null;
+    }
+    
+    // Ensure the map container is empty of any leftover HTML
+    const container = document.getElementById('map-container');
+    if (container) {
+        container.innerHTML = '';
+    }
+}
+
+function initLeafletMap() {
+    // Every time it starts, it checks if it needs to clean up first
+    if (window.L && window.L.markerClusterGroup) {
+        cleanupMap(); 
+        extractAllCoordinates();
+        return;
+    }
+
+    // --- Dynamic CSS (Keep existing styles) ---
+    var style = document.createElement('style');
+    style.innerHTML = `
+        .leaflet-container img { max-width: none !important; }
+        #map-container { background: #2b2f32; border: 1px solid #343a40; border-radius: 12px; width: 100%; height: 430px; }
+        .liquid-cluster {
+            display: flex !important; align-items: center !important; justify-content: center !important;
+            background: rgba(74, 144, 226, 0.6); color: white; font-weight: bold; border-radius: 50%;
+            box-shadow: 0 0 20px 15px rgba(74, 144, 226, 0.45); border: 0px solid rgba(255, 255, 255, 0.3);
+        }
+        .liquid-point { 
+			background: rgba(74, 144, 226, 0.8); border-radius: 50%; 
+			box-shadow: 0 0 10px 5px rgba(74, 144, 226, 0.5); border: 0px solid white; cursor: pointer; 
+		}
+        .res-table { width: 100%; color: #fff; font-size: 0.85rem; border-collapse: collapse; }
+        .res-table th { color: #6c757d; text-transform: uppercase; font-size: 0.7rem; padding: 8px; border-bottom: 1px solid #444; }
+        .res-table td { padding: 8px; border-bottom: 1px solid #333; 
+		}
+    `;
+    document.head.appendChild(style);
+
+    // --- Load Assets & Start ---
+    var script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.onload = function() {
+        var cScript = document.createElement('script');
+        cScript.src = 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js';
+        cScript.onload = extractAllCoordinates;
+        document.head.appendChild(cScript);
+        
+        // Load CSS files
+        ['https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', 
+         'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css'].forEach(href => {
+            var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href;
+            document.head.appendChild(l);
+        });
+    };
+    document.head.appendChild(script);
+}
+
+function extractAllCoordinates() {
+    var finalCoordinates = [];
+    $.get(`/api/vehicle/odometerrecords?vehicleId=${GetVehicleId().vehicleId}`, function(result) {
+        if (result && result.length > 0) {
+            result.forEach(entry => {
+                const extraFields = entry.extraFields || [];
+                const coordField = extraFields.find(f => f.name === 'Coordinates');
+                if (coordField && coordField.value.includes(',')) {
+                    var parts = coordField.value.split(',');
+                    var lat = parseFloat(parts[0]);
+                    var lon = parseFloat(parts[1]);
+                    if (!isNaN(lat) && !isNaN(lon)) {
+                        finalCoordinates.push([lat, lon]);
+                    }
+                }
+            });
+        }
+        $("#odometerEntriesLabel").html(result.length);
+        setupMap(finalCoordinates);
+    });
+}
+function fetchRecordsByCoord(coordArray) {
+    const resultsDiv = $("#vehicleMaintenanceMapResults");
+    resultsDiv.html('<p style="color: #adb5bd;">Fetching records...</p>');
+
+    // Standardize helper to handle quotes, spaces, and trailing zeros
+    const standardize = (str) => {
+        if (!str) return "";
+        // Clean string and convert to number then back to string to kill trailing zeros
+        return str.toString().replace(/[\s"]/g, '').split(',').map(n => parseFloat(n).toString()).join(',');
+    };
+
+    // Prepare a "Clean Set" of the clicked coordinates
+    const targetSet = coordArray.map(c => standardize(c));
+
+    $.get(`/api/vehicle/odometerrecords?vehicleId=${GetVehicleId().vehicleId}`, function(data) {
+        const filtered = data.filter(entry => {
+            const f = (entry.extraFields || []).find(field => field.name === 'Coordinates');
+            if (!f) return false;
+            
+            // If the entry's coordinate (standardized) exists in our clicked set, keep it!
+            return targetSet.includes(standardize(f.value));
+        });
+
+        if (filtered.length > 0) {
+            // Sorting newest first
+            filtered.sort((a, b) => {
+                const pA = a.date.split('.');
+                const pB = b.date.split('.');
+                return new Date(pB[2], pB[1]-1, pB[0]) - new Date(pA[2], pA[1]-1, pA[0]);
+            });
+
+            let html = '<div class="res-table-container"><table class="res-table"><thead><tr>';
+            html += '<th>Date</th><th>Odometer</th><th>Notes</th></tr></thead><tbody>';
+
+            filtered.forEach(rec => {
+			    const dateDisplay = rec.date;
+                const odoDisplay = rec.odometer || '0';
+                const noteDisplay = rec.notes || '<span>-</span>';
+                const recordId = rec.id;
+
+                html += `
+                <tr onclick="hideCustomWidgetsModal(); loadMapSearchResult(${recordId}, 'OdometerRecord')" 
+                    style="cursor:pointer;" class="record-row">
+                    <td style="white-space:nowrap; color: #adb5bd;">${dateDisplay}</td>
+                    <td style="color: #ffffff;">
+                        <i class="bi bi-speedometer2" style="margin-right:8px; color: #6c757d;"></i>${odoDisplay}
+                    </td>
+                    <td style="color: #dee2e6;">${noteDisplay}</td>
+                </tr>`;
+            });
+
+            html += '</tbody></table></div>';
+            resultsDiv.html(html);
+        } else {
+            resultsDiv.html('<p style="color: #6c757d;">No entries found for this location.</p>');
+        }
+    });
+}
+
+function setupMap(coords) {
+// Start Point: Midpoint between two specified locations
+    // Lat: (46.62177 + 48.20127) / 2 = 47.41152
+    // Lon: (13.36646 + 16.33147) / 2 = 14.84896
+    vehicleMap = L.map('map-container', { zoomControl: true, attributionControl: false }).setView([47.41152, 14.84896], 7);
+//  vehicleMap = L.map('map-container', { zoomControl: true, attributionControl: false });
+
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png').addTo(vehicleMap);
+
+    markerClusterGroup = L.markerClusterGroup({
+        maxClusterRadius: 40,
+		spiderfyOnMaxZoom: false, // This stops the "explosion"
+		showCoverageOnHover: false, // Disables the "area" blue box on hover
+        iconCreateFunction: function(cluster) {
+            var count = cluster.getChildCount();
+            var size = count < 10 ? 30 : (count < 50 ? 45 : 60);
+            return L.divIcon({ html: `<span>${count}</span>`, className: 'liquid-cluster', iconSize: [size, size] });
+        }
+    });
+
+    coords.forEach(p => {
+        var marker = L.marker(p, { icon: L.divIcon({ className: 'liquid-point', iconSize: [12, 12] }) });
+        // Single Point Click: Pass an array with just one coordinate
+        marker.on('click', function() { 
+            fetchRecordsByCoord([p[0] + "," + p[1]]); 
+        });
+        markerClusterGroup.addLayer(marker);
+    });
+
+    // Cluster Click: Pass an array of ALL coordinates inside the cluster
+    markerClusterGroup.on('clusterclick', function (a) {
+        var markersInCluster = a.layer.getAllChildMarkers();
+        var coordList = markersInCluster.map(m => {
+            var ll = m.getLatLng();
+            return ll.lat + "," + ll.lng;
+        });
+        fetchRecordsByCoord(coordList);
+    });
+
+    vehicleMap.addLayer(markerClusterGroup);
+
+// 1. Immediate refresh
+    vehicleMap.invalidateSize();
+
+    // 2. Delayed refresh (Crucial for Modals)
+    // This catches the map once the modal animation finishes
+    setTimeout(function() {
+        if (vehicleMap) {
+            vehicleMap.invalidateSize(true);
+            // Optional: Re-fit the bounds to ensure markers aren't stuck in the corner
+          //  if (coords.length > 0) {
+          //      var bounds = L.latLngBounds(coords);
+          //      vehicleMap.fitBounds(bounds, { padding: [20, 20] });
+          //  }
+        }
+    }, 200)
+
+
+
+//  Add Custom Hub Buttons (Carinthia, Vienna)
+    var homeButtons = L.control({position: 'topleft'});
+    homeButtons.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'map-home-controls');
+        div.innerHTML = `
+            <button onclick="vehicleMap.flyTo([46.62177, 13.36646], 10)" title="Carinthia">Carinthia</button><br>
+            <button onclick="vehicleMap.flyTo([48.20127, 16.33147], 10)" title="Vienna">Vienna</button>
+        `;
+        return div;
+    };
+    homeButtons.addTo(vehicleMap);
+    
+// Force tile refresh
+    var count = 0;
+    var interval = setInterval(function() {
+        if (!vehicleMap) { clearInterval(interval); return; }
+        vehicleMap.invalidateSize();
+        if (count++ > 10) clearInterval(interval);
+    }, 250);
+}
+
+initLeafletMap();
+</script>
+
+<div class="modal-header" style="border-bottom: 1px solid #343a40; background-color: #212529;">
+    <h5 class="modal-title" style="color: white;">Vehicle Movement History</h5>
+    <button type="button" class="btn-close btn-close-white" onclick="hideCustomWidgetsModal()" aria-label="Close"></button>
+</div>
+
+<div class="modal-body" style="max-height:85vh; overflow-y:auto; background-color: #212529; padding: 15px;">
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-12">
+                <span class="text-secondary">Odometer entries:</span>
+                <span id="odometerEntriesLabel"></span>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-12"><div id="map-container" style="z-index: 1;"></div></div></div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div style="background: #2b2f32; border: 1px solid #343a40; border-radius: 8px; padding: 15px; min-height: 100px;">
+                    <h6 style="color: #6c757d; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1.5px; margin-bottom: 15px;">Location Details</h6>
+                    <div id="vehicleMaintenanceMapResults"><p style="color: #555; font-style: italic;">Select a point on the map to see details...</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
