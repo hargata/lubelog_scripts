@@ -1,0 +1,94 @@
+/*Based on work done by iamdabe*/
+
+html[data-bs-theme="light"] {
+    /* Main colors */
+    --bs-primary: #6bb0b6;
+    --bs-secondary: #76c2c9;
+    --bs-primary-rgb: 118, 194, 201;
+    --bs-secondary-rgb: 108, 117, 125;
+    /* Document colors */
+    --bs-body-color: #000;
+    --bs-body-color-rgb: 0, 0, 0;
+    --bs-body-bg: #f4ffff;
+    --bs-body-bg-rgb: 246, 255, 255;
+    --bs-secondary-color: #6b999e;
+    --bs-secondary-color-rgb: 26, 33, 33; /*change*/
+    --bs-secondary-bg: #9cc0c0;
+    --bs-secondary-bg-rgb: 163, 191, 192;
+    --bs-tertiary-color: rgba(222, 226, 230, 0.5);
+    --bs-tertiary-color-rgb: 222, 226, 230;
+    --bs-tertiary-bg: #bfdbde;
+    --bs-tertiary-bg-rgb: 43, 48, 53;
+    /* Links */
+    --bs-link-color: var(--bs-primary);
+    --bs-link-hover-color: var(--bs-secondary);
+    --bs-link-color-rgb: var(--bs-primary-rgb);
+    --bs-link-hover-color-rgb: var(--bs-secondary-rgb);
+    --bs-border-color: #bfdbde;
+    --bs-border-color-translucent: rgba(var(--bs-primary-rgb), 0.1);
+    /* Forms */
+    --bs-form-check-bg: #212529;
+    --bs-form-check-border: #6c757d;
+    --bs-form-check-checked-bg-color: var(--bs-secondary-color);
+    --bs-form-check-checked-border-color: var(--bs-secondary-color);
+    --bs-form-check-checked-color: #fff;
+}
+html[data-bs-theme="dark"] {
+    /* Main colors */
+    --bs-primary: #76c2c9;
+    --bs-secondary: #6c757d;
+    --bs-primary-rgb: 118, 194, 201;
+    --bs-secondary-rgb: 108, 117, 125;
+    /* Document colors */
+    --bs-body-color: #ffffff;
+    --bs-body-color-rgb: 222, 226, 230;
+    --bs-body-bg: #171a1a;
+    --bs-body-bg-rgb: 23, 26, 26;
+    --bs-secondary-color: #4b7c81;
+    --bs-secondary-color-rgb: 75, 124, 129;
+    --bs-secondary-bg: #1a2121;
+    --bs-secondary-bg-rgb: 26, 33, 33;
+    --bs-tertiary-color: rgba(222, 226, 230, 0.5);
+    --bs-tertiary-color-rgb: 222, 226, 230;
+    --bs-tertiary-bg: #2b3035;
+    --bs-tertiary-bg-rgb: 43, 48, 53;
+    /* Links */
+    --bs-link-color: var(--bs-primary);
+    --bs-link-hover-color: var(--bs-secondary-color);
+    --bs-link-color-rgb: var(--bs-primary-rgb);
+    --bs-link-hover-color-rgb: var(--bs-secondary-rgb);
+    --bs-border-color: #495057;
+    --bs-border-color-translucent: rgba(var(--bs-primary-rgb), 0.1);
+    /* Forms */
+    --bs-form-check-bg: #212529;
+    --bs-form-check-border: #6c757d;
+    --bs-form-check-checked-bg-color: var(--bs-secondary-color);
+    --bs-form-check-checked-border-color: var(--bs-secondary-color);
+    --bs-form-check-checked-color: #fff;
+}
+
+.btn-primary {
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-color: var(--bs-body-color);
+    --bs-btn-hover-bg: var(--bs-link-hover-color);
+    --bs-btn-hover-border-color: var(--bs-link-hover-color);
+    --bs-btn-active-color: var(--bs-body-color);
+    --bs-btn-active-bg: var(--bs-link-hover-color);
+    --bs-btn-active-border-color: var(--bs-link-hover-color);
+    --bs-btn-disabled-color: var(--bs-body-color);
+    --bs-btn-disabled-bg: var(--bs-link-hover-color);
+    --bs-btn-disabled-border-color: var(--bs-link-hover-color);
+}
+/* modal */
+.btn-close {
+    --bs-btn-close-color: var(--bs-body-color);
+    --bs-btn-close-opacity: 0.5;
+    --bs-btn-close-hover-opacity: 0.75;
+    --bs-btn-close-focus-shadow: 0 0 0 0.25rem var(--bs-primary);
+}
+
+.frosted {
+    background-color: rgba(0,0,0,0) !important;
+}
